@@ -1,21 +1,50 @@
 import random
 
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+
+choose = [rock, paper, scissors]
+
 player_choice = int(input("Type 0 for rock, 1 for paper or 2 for scissors\n"))
 computer_choice = random.randint(0, 2)
 
 if player_choice == 0 and computer_choice == 1:
-    print("Your choice is rock\n\nComputer choice is paper\nYou lose")
+    print(f"You: {choose[player_choice]}\nComputer: {choose[computer_choice]}\nYou lose")
 elif player_choice == 0 and computer_choice == 2:
-    print("Your choice is rock\n\nComputer choice is scissors\nYou win")
+    print(f"You: {choose[player_choice]}\nComputer: {choose[computer_choice]}\nYou win")
 elif player_choice == 1 and computer_choice == 0:
-    print("Your choice is paper\n\nComputer choice is rock\nYou win")
+    print(f"You: {choose[player_choice]}\nComputer: {choose[computer_choice]}\nYou win")
 elif player_choice == 1 and computer_choice == 2:
-    print("Your choice is paper\n\nComputer choice is scissors\nYou lose")
+    print(f"You: {choose[player_choice]}\nComputer: {choose[computer_choice]}\nYou lose")
 elif player_choice == 2 and computer_choice == 0:
-    print("Your choice is scissors\n\nComputer choice is rock\nYou lose")
+    print(f"You: {choose[player_choice]}\nComputer: {choose[computer_choice]}\nYou lose")
 elif player_choice == 2 and computer_choice == 1:
-    print("Your choice is scissors\n\nComputer choice is paper\nYou win")
+    print(f"You: {choose[player_choice]}\nComputer: {choose[computer_choice]}\nYou win")
 elif player_choice == computer_choice:
-    print("Draw")
+    print(f"You: {choose[player_choice]}\nComputer: {choose[computer_choice]}\nDraw")
 else:
     print("ERROR")
