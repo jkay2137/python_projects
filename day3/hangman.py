@@ -1,66 +1,14 @@
 # HANGMAN GAME
 import random
+import hangman_art.py
+import hangman_words.py
 
-# Hangman ASCII
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
+# Printing logo in ASCII
+print(hangman_art.logo)
 
 # Variables 
-words_list = ["mouse", "melon", "camel", "letters"]
+stages = hangman_art.stages
+words_list = hangman_words.word_list
 word = random.choice(words_list)
 n = word.__len__()
 lives = 6
@@ -84,7 +32,6 @@ while True:
 
     if word.find(guess) == -1:
         lives -= 1
-        print(lives)
     
     print(' '.join(blanks))   
     print(stages[lives])
