@@ -45,8 +45,8 @@ def console_clear():
 while con:
     second_obj = data[rand_num(first_obj)]    
     print(art.logo)
-    print(f"Compare A: {first_obj['name']}, {first_obj['description']}, from {first_obj['country']}.")
+    print(f"Compare A: {first_obj['name']}, a {first_obj['description']}, from {first_obj['country']}.")
     print(art.vs)
-    print(f"Against B: {second_obj['name']}, {second_obj['description']}, from {second_obj['country']}.")
+    print(f"Against B: {second_obj['name']}, a {second_obj['description']}, from {second_obj['country']}.")
     choice = input("Who has more followers? [A/B]: ").upper()
     result(compare(choice))
