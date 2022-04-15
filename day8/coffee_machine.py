@@ -1,10 +1,9 @@
 # Coffee Machine Program
 import machine
 
-
 con = True
 change = 0
-
+not_enough = ""
 
 def show_raport():
     print(f"Water: {machine.resources['water']}")
@@ -19,69 +18,38 @@ def count_coins():
     pennies = int(input("How many pennies?: "))
 
     result = quarters * machine.COINS["quarter"] + dimes * machine.COINS["dime"] + nickles * machine.COINS["nickel"] + pennies * machine.COINS["penny"]
-    return result
+    return round(result, 2)
 
 
 def check_coins(choice):
     global change
     coins = count_coins()
     
-    if choice == "cappucino":
-        if coins < machine.MENU["cappucino"]["cost"]:
-            add_resources(choice)
-            return False
-        else:
-            change = coins - machine.MENU["cappucino"]["cost"]
-            machine.resources["coins"] += machine.MENU["cappucino"]["cost"]
-            return True
-    elif choice == "espresso":
-        if coins < machine.MENU["espresso"]["cost"]:
-            add_resources(choice)
-            return False
-        else:
-            change = coins - machine.MENU["espresso"]["cost"]
-            machine.resources["coins"] += machine.MENU["espresso"]["cost"]
-            return True
-    elif choice == "latte":
-        if coins < machine.MENU["latte"]["cost"]:
-            add_resources(choice)
-            return False
-        else:
-            change = coins - machine.MENU["latte"]["cost"]
-            machine.resources["coins"] += machine.MENU["latte"]["cost"]
-            return True
+    if coins < machine.MENU[choice]["cost"]:
+        add_resources(choice)
+        return False
+    else:
+        change = coins - machine.MENU[choice]["cost"]
+        machine.resources["coins"] += machine.MENU[choice]["cost"]
+        return True
+    
 
 def check_resources(choice):
-    if choice == "cappucino":
-        if ((machine.resources["water"] - machine.MENU["cappucino"]["water"] < 0) 
-        and (machine.resources["milk"] - machine.MENU["cappucino"]["milk"] < 0)
-        and (machine.resources["coffee"] - machine.MENU["cappucino"]["coffee"] < 0)):
-            return False
-        else:
-            machine.resources["water"] -= machine.MENU["cappucino"]["water"]
-            machine.resources["milk"] -= machine.MENU["cappucino"]["milk"]
-            machine.resources["coffee"] -= machine.MENU["cappucino"]["coffee"]
-            return True
-    elif choice == "espresso":
-        if ((machine.resources["water"] - machine.MENU["espresso"]["water"] < 0) 
-        and (machine.resources["milk"] - machine.MENU["espresso"]["milk"] < 0)
-        and (machine.resources["coffee"] - machine.MENU["espresso"]["coffee"] < 0)):
-            return False
-        else:
-            machine.resources["water"] -= machine.MENU["espresso"]["water"]
-            machine.resources["milk"] -= machine.MENU["espresso"]["milk"]
-            machine.resources["coffee"] -= machine.MENU["espresso"]["coffee"]
-            return True
-    elif choice == "latte":
-        if ((machine.resources["water"] - machine.MENU["latte"]["water"] < 0) 
-        and (machine.resources["milk"] - machine.MENU["latte"]["milk"] < 0)
-        and (machine.resources["coffee"] - machine.MENU["latte"]["coffee"] < 0)):
-            return False
-        else:
-            machine.resources["water"] -= machine.MENU["latte"]["water"]
-            machine.resources["milk"] -= machine.MENU["latte"]["milk"]
-            machine.resources["coffee"] -= machine.MENU["latte"]["coffee"]
-            return True
+    global not_enough
+    if machine.resources["water"] - machine.MENU[choice]["water"] < 0:
+        not_enough = "water"
+        return False
+    elif machine.resources["milk"] - machine.MENU[choice]["milk"] < 0:
+        not_enough = "milk"
+        return False
+    elif machine.resources["coffee"] - machine.MENU[choice]["coffee"] < 0:
+        not_enough = "coffee"
+        return False
+    else:
+        machine.resources["water"] -= machine.MENU[choice]["water"]
+        machine.resources["milk"] -= machine.MENU[choice]["milk"]
+        machine.resources["coffee"] -= machine.MENU[choice]["coffee"]
+        return True
 
 def add_resources(choice):
     machine.resources["coffee"] += machine.MENU[choice]["coffee"]
@@ -100,7 +68,7 @@ def make_coffee(choice):
         else:
             return f"Sorry that's not enough money. Money refunded."
     else:
-        return f"Sorry there is not enough resources."
+        return f"Sorry there is not enough {not_enough}."
 
 
 while con:
