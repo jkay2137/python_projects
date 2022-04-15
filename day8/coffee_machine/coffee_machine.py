@@ -6,9 +6,9 @@ change = 0
 not_enough = ""
 
 def show_raport():
-    print(f"Water: {machine.resources['water']}")
-    print(f"Milk: {machine.resources['milk']}")
-    print(f"Coffee: {machine.resources['coffee']}")
+    print(f"Water: {machine.resources['water']}ml")
+    print(f"Milk: {machine.resources['milk']}ml")
+    print(f"Coffee: {machine.resources['coffee']}g")
     print(f"Coins: {machine.resources['coins']}")
 
 def count_coins():
