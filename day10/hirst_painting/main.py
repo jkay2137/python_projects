@@ -16,7 +16,6 @@ y = 0
 
 turtle = Turtle()
 turtle.speed(0)
-turtle.color("white")
 turtle.penup()
 turtle.hideturtle()
 
