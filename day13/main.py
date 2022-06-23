@@ -7,8 +7,7 @@ states = states_data.state.to_list()
 counter = 0
 screen = turtle.Screen()
 screen.title("U.S. State Game")
-good_answers = []
-not_guessed = []    
+good_answers = []  
 img = "blank_states_img.gif"
 
 screen.addshape(img)
@@ -37,9 +36,7 @@ while counter < 50:
         good_answers.append(answer)
         write(answer)
     
-for state in states: 
-    if state not in good_answers:
-        not_guessed.append(state)
+not_guessed = [state for state in states if state not in good_answers]
 
 not_guessed_dict = {"States": not_guessed}
 
